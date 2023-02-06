@@ -1,14 +1,13 @@
 dataset:
-  dataset_path: ./dataset/Final_Dataset_V1/
-  path_dataset_train_csv: train.csv
-  path_dataset_val_csv: val.csv
-  path_dataset_test_csv: test.csv
+  dataset_path: /kaggle/input/rsna-final-train-val-no-pad-512/final_train_val_split_augmented/train_val_augmented_no_pad_512
+  path_dataset_train_csv: /kaggle/input/rsna-final-train-val-no-pad-512/final_train_val_split_augmented/augmented_train.csv
+  path_dataset_val_csv: /kaggle/input/rsna-final-train-val-no-pad-512/final_train_val_split_augmented/val.csv
   batch_size: 32
 model:
   name_pretrained_model: cct_14_7x2_224
   pretrained: 1
-  saving_dir_experiments: ./exps_classifier_brain_tumor/classificatore_cct_224x224/
-  saving_dir_model: models
+  saving_dir_experiments: results/cct_14_7x2_224
+  saving_dir_model: bceloss_v1
   num_classes: 1
   num_epoch: 30
   learning_rate: 0.0005
@@ -31,6 +30,6 @@ model:
 data:
   size: 224
   do_resize: 1
-  normalization: imagenet
+  normalization: None
 
 
