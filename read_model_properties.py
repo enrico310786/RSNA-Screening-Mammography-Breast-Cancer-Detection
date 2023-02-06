@@ -3,7 +3,8 @@ import yaml
 import torch
 from image_classification_model import ImageClassificationModel
 from prettytable import PrettyTable
-from torchinfo import summary
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("device: ", device)
@@ -11,12 +12,13 @@ print("device: ", device)
 def load_config(path="configs/default.yaml") -> dict:
     """
     Loads and parses a YAML configuration file.
-
     :param path: path to YAML configuration file
     :return: configuration dictionary
     """
     with open(path, "r", encoding="utf-8") as ymlfile:
         cfg = yaml.safe_load(ymlfile)
+        print("cfg: ", cfg)
+        print("")
     return cfg
 
 
