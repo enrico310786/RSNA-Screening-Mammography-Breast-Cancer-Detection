@@ -10,7 +10,7 @@ model:
   saving_dir_model: bceloss_v1
   num_classes: 1
   num_epoch: 30
-  learning_rate: 0.0005
+  learning_rate: 0.00001
   freeze_layers: 0
   #epoch_start_unfreeze: 1
   #layer_start_unfreeze: 0
@@ -23,8 +23,8 @@ model:
   lr_patience: 2
   scheduler_step_size: 5
   lr_factor: 0.1
-  T_max: 5
-  eta_min: 0.000001
+  T_max: 10
+  eta_min: 0.0000001
   do_train: 1
   do_test: 1
 data:
