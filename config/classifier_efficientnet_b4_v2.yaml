@@ -6,10 +6,10 @@ dataset:
 model:
   name_pretrained_model: efficientnet_b4
   saving_dir_experiments: results/efficientnet_b4/
-  saving_dir_model: models
+  saving_dir_model: models_v2
   num_classes: 1
-  num_epoch: 30
-  learning_rate: 0.0005
+  num_epoch: 20
+  learning_rate: 0.00001
   freeze_layers: 1
   epoch_start_unfreeze: 1
   layer_start_unfreeze: 0
@@ -22,8 +22,8 @@ model:
   lr_patience: 2
   scheduler_step_size: 5
   lr_factor: 0.1
-  T_max: 5
-  eta_min: 0.000001
+  T_max: 10
+  eta_min: 0.0000001
   do_train: 1
   do_test: 1
 data:
