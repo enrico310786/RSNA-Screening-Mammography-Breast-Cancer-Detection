@@ -255,14 +255,14 @@ def train_model(device,
         if best_test_pfs < val_epoch_pfs:
             print("We have a new best model! Save the model")
 
-            # update best_auc
+            # update best_test_pfs
             best_test_pfs = val_epoch_pfs
             save_obj = {
                 'model': model.state_dict(),
                 'optimizer': optimizer.state_dict(),
                 'scheduler': lr_scheduler.state_dict(),
                 'epoch': epoch,
-                'best_test_pfs': val_epoch_pfs
+                'best_test_pfs': best_test_pfs
             }
             print("Save best checkpoint at: ", os.path.join(checkpoint_dir, 'best.pth'))
             torch.save(save_obj, os.path.join(checkpoint_dir, 'best.pth'), _use_new_zipfile_serialization=False)
@@ -277,7 +277,7 @@ def train_model(device,
                 'optimizer': optimizer.state_dict(),
                 'scheduler': lr_scheduler.state_dict(),
                 'epoch': epoch,
-                'best_test_pfs': val_epoch_pfs
+                'best_test_pfs': best_test_pfs
             }
             print("Save latest checkpoint at: ", os.path.join(checkpoint_dir, 'latest.pth'))
             torch.save(save_obj, os.path.join(checkpoint_dir, 'latest.pth'), _use_new_zipfile_serialization=False)
@@ -522,7 +522,7 @@ def run_train_test_model(cfg, do_train, do_test, aws_bucket=None, aws_directory=
             print('Setting the new starting epoch: ', checkpoint['epoch'] + 1)
             best_epoch = checkpoint['epoch'] + 1
 
-            print('Setting best auc from checkpoint: ', checkpoint['best_test_pfs'])
+            print('Setting best fps from checkpoint: ', checkpoint['best_test_pfs'])
             best_test_pfs = checkpoint['best_test_pfs']
 
         # run train model
