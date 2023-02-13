@@ -6,7 +6,7 @@ dataset:
 model:
   name_pretrained_model: cct_14_7x2_384
   pretrained: 1
-  saving_dir_experiments: /kaggle/input/results/results/cct_14_7x2_384
+  saving_dir_experiments: results/cct_14_7x2_384
   saving_dir_model: bceloss_v2
   num_classes: 1
   num_epoch: 15

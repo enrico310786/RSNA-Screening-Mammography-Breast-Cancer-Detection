@@ -165,6 +165,8 @@ def preprocess_image(dicom_path, size, is_pad):
         elif h_sx == 0 and h_dx == 0:
             final_img[new_h - h:, :w] = img_crop
 
+        img_crop = final_img
+
     # resize the final square image
     final_img = cv2.resize(img_crop, (size, size))
 
@@ -179,8 +181,6 @@ def load_config(path="configs/default.yaml") -> dict:
     """
     with open(path, "r", encoding="utf-8") as ymlfile:
         cfg = yaml.safe_load(ymlfile)
-        print("cfg: ", cfg)
-        print("")
     return cfg
 
 
@@ -205,7 +205,7 @@ if __name__ == '__main__':
     print("Load the model")
     model = ImageClassificationModel(cfg)
 
-    path_best_checkpoint = os.path.join(cfg["model"]["saving_dir_experiments"], cfg["model"]["saving_dir_model"])
+    path_best_checkpoint = os.path.join(cfg["model"]["saving_dir_experiments"], cfg["model"]["saving_dir_model"], 'best.pth')
     print("Load the best checkpoint: ", path_best_checkpoint)
     checkpoint = torch.load(path_best_checkpoint, map_location=torch.device(device))
     model.load_state_dict(checkpoint['model'])
@@ -239,7 +239,7 @@ if __name__ == '__main__':
             patient_id = str(row.patient_id)
             image_id = str(row.image_id)
             img_path = os.path.join(test_set_path, patient_id, image_id + '.dcm')
-            image = preprocess_image(img_path, cfg["data"]["size"])
+            image = preprocess_image(dicom_path=img_path, size=cfg["data"]["size"], is_pad=is_pad)
             image = expand_greyscale_image_channels(image)
             image = transforms.ToTensor()(image)
             image = image[None].to(device)
