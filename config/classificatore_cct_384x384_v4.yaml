@@ -1,15 +1,16 @@
 dataset:
+dataset:
   dataset_path: /kaggle/input/rsna-final-train-val-no-pad-512/final_train_val_split_augmented/train_val_augmented_no_pad_512
   path_dataset_train_csv: /kaggle/input/rsna-final-train-val-no-pad-512/final_train_val_split_augmented/augmented_train.csv
   path_dataset_val_csv: /kaggle/input/rsna-final-train-val-no-pad-512/final_train_val_split_augmented/val.csv
-  batch_size: 32
+  batch_size: 16
 model:
-  name_pretrained_model: cct_14_7x2_224
+  name_pretrained_model: cct_14_7x2_384
   pretrained: 1
-  saving_dir_experiments: results/cct_14_7x2_224
-  saving_dir_model: bceloss_v1
+  saving_dir_experiments: results/cct_14_7x2_384
+  saving_dir_model: bceloss_v4
   num_classes: 1
-  num_epoch: 30
+  num_epoch: 15
   learning_rate: 0.00001
   freeze_layers: 0
   #epoch_start_unfreeze: 1
@@ -18,17 +19,17 @@ model:
   dropout: 0.4
   criterion_type: BCE_LOSS
   alpha: 0.70
-  pos_class_weight: 2.5
+  pos_class_weight: 1.8
   scheduler_type: CosineAnnealingLR
   lr_patience: 2
   scheduler_step_size: 5
   lr_factor: 0.1
-  T_max: 10
+  T_max: 5
   eta_min: 0.0000001
   do_train: 1
   do_test: 1
 data:
-  size: 224
+  size: 384
   do_resize: 1
   normalization: None
 
